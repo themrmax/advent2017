@@ -102,3 +102,36 @@ def day5b(s):
         if pos >= len(L):
             return n_steps
         n_steps += 1
+
+import numpy as np
+def day6(s):
+    dat = [int(i) for i in s.split()]
+    states = [dat.copy()]
+    while 1:
+        c = np.argmax(dat)
+        v = dat[c]
+        dat[c] = 0
+        c = (c + 1) % len(dat)
+        while v > 0:
+            dat[c] += 1
+            v -= 1
+            c = (c + 1) % len(dat)
+        if dat in states:
+            return len(states)
+        states.append(dat.copy())
+
+def day6b(s):
+    dat = [int(i) for i in s.split()]
+    states = [dat.copy()]
+    while 1:
+        c = np.argmax(dat)
+        v = dat[c]
+        dat[c] = 0
+        c = (c + 1) % len(dat)
+        while v > 0:
+            dat[c] += 1
+            v -= 1
+            c = (c + 1) % len(dat)
+        if dat in states:
+            return len(states) - states.index(dat)
+        states.append(dat.copy())
